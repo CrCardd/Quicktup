@@ -1,0 +1,30 @@
+clique direito:
+reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+
+powershell:
+Font: Consolas
+cores
+{
+    "background": "#01245F",
+    "black": "#0C0C0C",
+    "blue": "#0037DA",
+    "brightBlack": "#767676",
+    "brightBlue": "#3B78FF",
+    "brightCyan": "#61D6D6",
+    "brightGreen": "#16C60C",
+    "brightPurple": "#B4009E",
+    "brightRed": "#E72826",
+    "brightWhite": "#F2F2F2",
+    "brightYellow": "#F9F120",
+    "cursorColor": "#FFFFFF",
+    "cyan": "#3A96DD",
+    "foreground": "#FFFFFF",
+    "green": "#13A10E",
+    "name": "Powershell Win10",
+    "purple": "#881798",
+    "red": "#C50F1F",
+    "selectionBackground": "#FFFFFF",
+    "white": "#FFFFFF",
+    "yellow": "#C19C00"
+},
+

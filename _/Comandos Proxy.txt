@@ -1,0 +1,68 @@
+ 
+
+--------------------------------------------------------------------------------
+---------------------------------- Proxy npm -----------------------------------
+
+USUARIO_DE_REDE - Login
+SENHA_DE_REDE - Senha
+
+npm config set proxy http://disrct:etsbosch2024@10.224.200.26:8080
+
+npm config set https-proxy=http://disrct:etsbosch2024@10.224.200.26:8080
+
+npm config set http-proxy=http://disrct:etsbosch2024@10.224.200.26:8080
+
+
+
+
+--------------------------------------------------------------------------------
+------------------------------  GIT e Proxy GIT --------------------------------
+
+git config --global user.name "Donathan"
+git config --global user.email "donathanramalho@yahoo.com.br"
+
+git config --global http.proxy http://disrct:etsbosch2024@rb-proxy-ca1.bosch.com:8080
+git config --global https.proxy https://disrct:etsbosch2024@rb-proxy-ca1.bosch.com:8080
+
+
+
+
+
+tentar clonar qualquer coisa, e logar com o seu GIT na janela que abrir
+
+
+Agora que as credenciais já estão definidas, rodar de novo os códigos com o seu usuário, para não ficar pedindo senha toda vez
+
+git config --global http.proxy "http://[SEU USUARIO NO GIT]@rb-proxy-de.bosch.com:8080"
+git config --global https.proxy "http://[SEU USUARIO NO GIT]@rb-proxy-de.bosch.com:8080"
+
+
+--------------------------------------------------------------------------------
+--------------------------------- Proxy Python ---------------------------------
+
+SET HTTPS_PROXY=http://USUARIO:SENHA@10.224.200.26:8080
+pip install --proxy http://user:password@rb-proxy-ca1.bosch.com:8080 BIBLIOTECA
+
+--------------------------------------------------------------------------------
+----------------------------  Extensões no VSCode ------------------------------
+
+Configurações
+Pesquisar "PROXY"
+Colocar no primeiro campo:
+
+https://disrct:etsbosch2024@10.223.200.26:8080
+
+
+
+--------------------------------------------------------------------------------
+----------------------------------  Arduino ------------------------------------
+
+Rede
+Configuração manual de proxy > HTTP:
+
+Nome do Host: rb-proxy-de.bosch.com
+Numero da porta: 8080
+
+
+Configurações > Preferências > URLs Adicionais para Gerenciadores de Placas:
+https://dl.espressif.com/dl/package_esp32_index.json
