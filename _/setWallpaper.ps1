@@ -1,4 +1,4 @@
-$wallpaperPath = ""
+$wallpaperPath = "C:\Users\Aluno\Documents\Setup\_\wllpp.jpg"
 
 # Atualiza o registro
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name Wallpaper -Value $wallpaperPath
