@@ -1,14 +1,20 @@
-public abstract class Setting
+using Quicktup;
+
+public abstract class Setting(string ConfigName)
 {
     public bool Active {get; set;} = true;
+    public string ConfigName = ConfigName;
+    
     public abstract string Execute();
-    public abstract string StartMessage();
+    public abstract string Message();
+    public abstract string SetVar();
 
     public void Run()
     {
+        Active = bool.TryParse(Configuration.ReadConfig(ConfigName), out var val) && val;
         if(Active)
         {
-            Console.Write(StartMessage() + " - " + Execute());
+            Console.WriteLine("Setting " + Message() + " - " + Execute());
         }
     }
 }

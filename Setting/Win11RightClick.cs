@@ -3,7 +3,7 @@ using Microsoft.Win32;
 
 namespace Quicktup;
 
-public class Win11RightClick : Setting
+public class Win11RightClick(string ConfigName) : Setting(ConfigName)
 {
     public override string Execute()
     {
@@ -28,8 +28,10 @@ public class Win11RightClick : Setting
         return "Success";
     }
 
-    public override string StartMessage()
+    public override string Message()
     {
         return "Replacing Windows 11 right click menu";
     }
+
+    public override string SetVar() => "";
 }

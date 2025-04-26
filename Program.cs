@@ -1,22 +1,21 @@
 ﻿namespace Quicktup;
 
-public struct SettingKey
+public class SettingKey(string key, Setting setting)
 {
-    public SettingKey(string key, Setting setting)
-    {
-        this.Key = key;
-        this.Setting = setting;
-    }
-    public string Key;
-    public Setting Setting;
+    public string Key = key;
+    public Setting Setting = setting;
 
-    public readonly void Run(){Setting.Run();}
+    public void Run() 
+        => Setting.Run();
 }
 
 public static class Setup
 {
-    public static Dictionary<string, Setting> settings = new(){
-        ["Win11"] = new Win11RightClick()
+    public static Dictionary<string, Setting> settings = 
+    new()
+    {
+        ["Win11"] = new Win11RightClick("Win11"),
+        ["Wllpp"] = new Wallpaper("Wllpp")
     };
 }
 
@@ -24,7 +23,17 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        Configuration.ConfigureApplication();
+        if(!File.Exists("config.cfg"))
+        {
+            Configuration.ConfigureSettings();
+            Configuration.ConfigureApplication();
+        }
+
         Setting? setting;
+        if(Setup.settings.TryGetValue("Wllpp", out setting)){
+            setting.Run();
+        }
         if(Setup.settings.TryGetValue("Win11", out setting)){
             setting.Run();
         }
