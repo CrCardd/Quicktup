@@ -8,7 +8,7 @@ public class Wallpaper(string ConfigName) : Setting(ConfigName)
 {
     public override string Execute()
     {
-        var var = Configuration.ReadConfig(this.ConfigName + "_var");
+        var var = Configuration.ReadConfig($"{this.ConfigName}{Configuration.ReadConfig("VarExtension")}");
         if(!File.Exists(var))
             return "Wallpaper File not found";
 
@@ -26,10 +26,10 @@ public class Wallpaper(string ConfigName) : Setting(ConfigName)
 
     public override string Message()
     {
-        return "Setting Desktop Wallpaper";
+        return "Desktop Wallpaper";
     }
 
-    public override string SetVar()
+    public override string? SetVar()
     {
         string path;
         Console.WriteLine("Wallpaper image absolute_path:  ");
@@ -47,7 +47,6 @@ public class Wallpaper(string ConfigName) : Setting(ConfigName)
         if(File.Exists(destinationPath))
             File.Delete(destinationPath);
 
-        Console.WriteLine("UEEEEE");
         File.Copy(path, destinationPath);
         return $"\"{destinationPath}\"";
     }

@@ -30,8 +30,8 @@ public class Win11RightClick(string ConfigName) : Setting(ConfigName)
 
     public override string Message()
     {
-        return "Replacing Windows 11 right click menu";
+        return "Windows 11 right click menu";
     }
 
-    public override string SetVar() => "";
+    public override string? SetVar() => null;
 }

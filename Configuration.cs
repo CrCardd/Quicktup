@@ -10,38 +10,43 @@ public static class Configuration
             
     public static void ConfigureApplication()
     {
-        try{
-            Config = new ConfigurationBuilder()
+        if(!File.Exists("config.cfg"))
+            GenerateConfig();
+        Config = new ConfigurationBuilder()
             .AddIniFile($"{Directory.GetCurrentDirectory()}\\config.cfg", optional: false, reloadOnChange: false)
             .Build();
-        }catch{}
 
-        // Console.CancelKeyPress += (sender, e) =>
-        // {
-        //     string path = Directory.GetCurrentDirectory() + "\\wallpaper.png";
-
-        //     if (File.Exists(path))
-        //         File.Delete(path);
-
-        //     Environment.Exit(0);
-        // };
+        foreach(Setting setting in Setup.settings.Values)
+            ConfigureSetting(setting);
+        
+        Config = new ConfigurationBuilder()
+            .AddIniFile($"{Directory.GetCurrentDirectory()}\\config.cfg", optional: false, reloadOnChange: false)
+            .Build();
     }
-    public static void ConfigureSettings()
+    private static void GenerateConfig()
     {   
-        List<string> settingsConfig = [];
-        foreach (var setting in Setup.settings.Values)
+        List<string> config_cfg = [
+            "VarExtension=\"_var\"",
+            "AskAll=true"
+        ];  
+        File.WriteAllLines("config.cfg", config_cfg);
+    }
+    private static void ConfigureSetting(Setting setting)
+    {
+        if(ReadConfig(setting.ConfigName) is not null || !(bool.TryParse(ReadConfig("AskAll"), out var val) && val))
+            return;
+        List<string> lines = [];
+        bool option = Ask(setting.Message());
+        Console.WriteLine(setting.Message() + " -> " + option.ToString());
+        lines.Add($"{setting.ConfigName}={option}");
+        setting.Active = option;
+        if(option)
         {
-            bool option = Ask(setting.Message());
-            Console.WriteLine(setting.Message() + " -> " + option.ToString());
-            settingsConfig.Add(setting.ConfigName + "=" + option.ToString());
-            if(option)
-            {
-                string var = setting.SetVar();
-                if(!var.Equals(""))
-                    settingsConfig.Add(setting.ConfigName + "_var=" + var);
-            }
+            string? var = setting.SetVar();
+            if(var is not null)
+                lines.Add($"{setting.ConfigName}{ReadConfig("VarExtension")}={var}");
         }
-        File.WriteAllLines("config.cfg", settingsConfig);
+        File.AppendAllLines("config.cfg", lines);
     }
 
 

@@ -15,11 +15,6 @@ public class Program
     public static void Main(string[] args)
     {
         Configuration.ConfigureApplication();
-        if(!File.Exists("config.cfg"))
-        {
-            Configuration.ConfigureSettings();
-            Configuration.ConfigureApplication();
-        }
 
         Setting? setting;
         if(Setup.settings.TryGetValue("Wllpp", out setting)){
@@ -28,5 +23,6 @@ public class Program
         if(Setup.settings.TryGetValue("Win11", out setting)){
             setting.Run();
         }
+        Console.ReadLine();
     }
 }
