@@ -6,6 +6,9 @@
 # dotenv files
 .env
 
+wallpaper.png
+config.cfg
+
 obj
 bin
 

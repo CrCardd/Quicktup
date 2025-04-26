@@ -1,14 +1,5 @@
 ﻿namespace Quicktup;
 
-public class SettingKey(string key, Setting setting)
-{
-    public string Key = key;
-    public Setting Setting = setting;
-
-    public void Run() 
-        => Setting.Run();
-}
-
 public static class Setup
 {
     public static Dictionary<string, Setting> settings = 
