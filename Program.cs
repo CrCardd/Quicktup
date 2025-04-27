@@ -1,12 +1,16 @@
-﻿namespace Quicktup;
+﻿using Quicktup.Settings;
+using Quicktup.Util;
+
+namespace Quicktup;
 
 public static class Setup
 {
     public static Dictionary<string, Setting> settings = 
     new()
     {
-        ["Win11"] = new Win11RightClick("Win11"),
-        ["Wllpp"] = new Wallpaper("Wllpp")
+        [ConfigurationVariables.Win11RightClick] = new Win11RightClick(ConfigurationVariables.Win11RightClick),
+        [ConfigurationVariables.Wallpaper] = new Wallpaper(ConfigurationVariables.Wallpaper),
+        [ConfigurationVariables.Proxy] = new Proxy(ConfigurationVariables.Proxy)
     };
 }
 
@@ -17,12 +21,14 @@ public class Program
         Configuration.ConfigureApplication();
 
         Setting? setting;
-        if(Setup.settings.TryGetValue("Wllpp", out setting)){
+        if(Setup.settings.TryGetValue(ConfigurationVariables.Wallpaper, out setting)){
             setting.Run();
         }
-        if(Setup.settings.TryGetValue("Win11", out setting)){
+        if(Setup.settings.TryGetValue(ConfigurationVariables.Proxy, out setting)){
             setting.Run();
         }
-        Console.ReadLine();
+        if(Setup.settings.TryGetValue(ConfigurationVariables.Win11RightClick, out setting)){
+            setting.Run();
+        }
     }
 }

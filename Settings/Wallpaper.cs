@@ -1,14 +1,15 @@
 using Microsoft.Win32;
+using Quicktup.Util;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
-namespace Quicktup;
+namespace Quicktup.Settings;
 
 public class Wallpaper(string ConfigName) : Setting(ConfigName)
 {
     public override string Execute()
     {
-        var var = Configuration.ReadConfig($"{this.ConfigName}{Configuration.ReadConfig("VarExtension")}");
+        string? var = Configuration.ReadConfig($"{this.ConfigName}{ConfigurationVariables.VarExtension}");
         if(!File.Exists(var))
             return "Wallpaper File not found";
 
@@ -43,7 +44,7 @@ public class Wallpaper(string ConfigName) : Setting(ConfigName)
         } while(!File.Exists(path) && !Regex.IsMatch(path, ".+(.PNG | .png | .JPG | .jpg)"));
         path = path.Replace("\\", "\\\\");
         
-        string destinationPath = $"{Directory.GetCurrentDirectory()}\\wallpaper.png";
+        string destinationPath = $"{ConfigurationVariables.WallpaperPath}\\wallpaper.png";
         if(File.Exists(destinationPath))
             File.Delete(destinationPath);
 

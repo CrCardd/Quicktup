@@ -1,13 +1,12 @@
 using Microsoft.Extensions.Configuration;
+using Quicktup.Util;
 
 namespace Quicktup;
 
 public static class Configuration
 {
     private static IConfigurationRoot? Config;
-
     public static string? ReadConfig(string key) => Config?[key];
-            
     public static void ConfigureApplication()
     {
         if(!File.Exists("config.cfg"))
@@ -26,7 +25,7 @@ public static class Configuration
     private static void GenerateConfig()
     {   
         List<string> config_cfg = [
-            "VarExtension=\"_var\"",
+            $"VarExtension=\"{ConfigurationVariables.VarExtension}\"",
             "AskAll=true"
         ];  
         File.WriteAllLines("config.cfg", config_cfg);
@@ -37,14 +36,14 @@ public static class Configuration
             return;
         List<string> lines = [];
         bool option = Ask(setting.Message());
-        Console.WriteLine(setting.Message() + " -> " + option.ToString());
+        Console.WriteLine(setting.Message() + " -> " + (option ? "Yes" : "No"));
         lines.Add($"{setting.ConfigName}={option}");
         setting.Active = option;
         if(option)
         {
             string? var = setting.SetVar();
             if(var is not null)
-                lines.Add($"{setting.ConfigName}{ReadConfig("VarExtension")}={var}");
+                lines.Add($"{setting.ConfigName}{ConfigurationVariables.VarExtension}={var}");
         }
         File.AppendAllLines("config.cfg", lines);
     }

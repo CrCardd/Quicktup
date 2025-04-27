@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Microsoft.Win32;
 
-namespace Quicktup;
+namespace Quicktup.Settings;
 
 public class Win11RightClick(string ConfigName) : Setting(ConfigName)
 {
