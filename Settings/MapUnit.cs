@@ -1,4 +1,5 @@
 using Quicktup.Util;
+using System.Diagnostics;
 
 namespace Quicktup.Settings;
 
@@ -12,14 +13,14 @@ public class MapUnit(string ConfigName) : Setting(ConfigName)
             
         string letter = "S";
 
-        System.Diagnostics.Process process = new();
-        process.StartInfo.FileName = "cmd.exe";
-        process.StartInfo.Arguments = "/C net use " + letter + " " + networkPath;
-        process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden; 
+        Process process = new();
+        process.StartInfo.FileName = "powershell.exe";
+        process.StartInfo.Arguments = $"New-PSDrive -Name \"{letter}\" -Root {networkPath} -Persist -PSProvider \"FileSystem\" -Scope \"Global\"";
+        process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; 
         process.StartInfo.CreateNoWindow = true;
 
         process.Start();
-        process.WaitForExit();
+        process.WaitForExit();   
 
         if(process.ExitCode != 0)
             return "Network path is not valid";
