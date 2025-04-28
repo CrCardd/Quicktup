@@ -12,5 +12,5 @@ public static class ConfigurationVariables
     public static string MapUnit {get;} = "MUnit";
     public static string Git {get;} = "Git";
     public static string Reload {get;} = "Rload";
-    public static string VarExtension {get;} = "0";
+    public static string VarExtension {get;} = "_";
 }
