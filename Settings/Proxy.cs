@@ -8,7 +8,7 @@ public class Proxy(string ConfigName) : Setting(ConfigName)
     {
         string? data = Configuration.ReadConfig($"{ConfigurationVariables.Proxy}{ConfigurationVariables.VarExtension}");
         if(data is null) 
-            return "Couldn't found proxy configuration variable";
+            return "Couldn't find proxy configuration variable";
 
         string[] data_splited = data.Split(':', '@');
         if(data_splited.Length < 3)

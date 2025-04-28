@@ -10,6 +10,8 @@ public class Wallpaper(string ConfigName) : Setting(ConfigName)
     public override string Execute()
     {
         string? var = Configuration.ReadConfig($"{this.ConfigName}{ConfigurationVariables.VarExtension}");
+        if(var is null)
+            return "Couldn't find wallpaperPath configuration variable";
         if(!File.Exists(var))
             return "Wallpaper File not found";
 

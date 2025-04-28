@@ -8,9 +8,10 @@ public static class Setup
     public static Dictionary<string, Setting> settings = 
     new()
     {
-        [ConfigurationVariables.Win11RightClick] = new Win11RightClick(ConfigurationVariables.Win11RightClick),
         [ConfigurationVariables.Wallpaper] = new Wallpaper(ConfigurationVariables.Wallpaper),
-        [ConfigurationVariables.Proxy] = new Proxy(ConfigurationVariables.Proxy)
+        [ConfigurationVariables.Proxy] = new Proxy(ConfigurationVariables.Proxy),
+        [ConfigurationVariables.MapUnit] = new MapUnit(ConfigurationVariables.MapUnit),
+        [ConfigurationVariables.Win11RightClick] = new Win11RightClick(ConfigurationVariables.Win11RightClick),
     };
 }
 
@@ -25,6 +26,9 @@ public class Program
             setting.Run();
         }
         if(Setup.settings.TryGetValue(ConfigurationVariables.Proxy, out setting)){
+            setting.Run();
+        }
+        if(Setup.settings.TryGetValue(ConfigurationVariables.MapUnit, out setting)){
             setting.Run();
         }
         if(Setup.settings.TryGetValue(ConfigurationVariables.Win11RightClick, out setting)){
