@@ -1,8 +1,9 @@
 using Quicktup.Util;
+using Quicktup.Variables;
 
 namespace Quicktup.Settings;
 
-public class Proxy(string ConfigName) : Setting(ConfigName)
+public class Proxy(string ConfigName, IEnumerable<VariableInit> Variables) : Setting(ConfigName, Variables)
 {
     public override string Execute()
     {

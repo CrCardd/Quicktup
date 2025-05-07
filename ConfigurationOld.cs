@@ -1,20 +1,16 @@
 using Microsoft.Extensions.Configuration;
 using Quicktup.Util;
-using Quicktup.Variables;
 
 namespace Quicktup;
 
-public static class ConfigurationNew
+public static class Configuration
 {
     private static IConfigurationRoot? Config;
     public static string? ReadConfig(string key) => Config?[key];
     public static void ConfigureApplication()
     {
         if(!File.Exists("config.cfg"))
-        {
             GenerateConfig();
-        }
-
         Config = new ConfigurationBuilder()
             .AddIniFile($"{Directory.GetCurrentDirectory()}\\config.cfg", optional: false, reloadOnChange: false)
             .Build();
@@ -36,10 +32,20 @@ public static class ConfigurationNew
     }
     private static void ConfigureSetting(Setting setting)
     {
-        foreach(var variable in setting.Variables)
+        if(ReadConfig(setting.ConfigName) is not null || !(bool.TryParse(ReadConfig("AskAll"), out var val) && val))
+            return;
+        List<string> lines = [];
+        bool option = Ask(setting.Message());
+        Console.WriteLine(setting.Message() + " -> " + (option ? "Yes" : "No"));
+        lines.Add($"{setting.ConfigName}={option}");
+        setting.Active = option;
+        if(option)
         {
-            variable.Value.Value = ReadConfig($"{setting.ConfigName}.{variable.Key}");
+            string? var = setting.SetVar();
+            if(var is not null)
+                lines.Add($"{setting.ConfigName}{ConfigurationVariables.VarExtension}={var}");
         }
+        File.AppendAllLines("config.cfg", lines);
     }
 
 

@@ -1,11 +1,12 @@
 using Microsoft.Win32;
 using Quicktup.Util;
+using Quicktup.Variables;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
 namespace Quicktup.Settings;
 
-public class Wallpaper(string ConfigName) : Setting(ConfigName)
+public class Wallpaper(string ConfigName, IEnumerable<VariableInit> Variables) : Setting(ConfigName, Variables)
 {
     public override string Execute()
     {

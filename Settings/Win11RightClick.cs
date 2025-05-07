@@ -1,9 +1,10 @@
 using System.Diagnostics;
 using Microsoft.Win32;
+using Quicktup.Variables;
 
 namespace Quicktup.Settings;
 
-public class Win11RightClick(string ConfigName) : Setting(ConfigName)
+public class Win11RightClick(string ConfigName, IEnumerable<VariableInit> Variables) : Setting(ConfigName, Variables)
 {
     public override string Execute()
     {

@@ -1,9 +1,10 @@
 using Quicktup.Util;
+using Quicktup.Variables;
 using System.Diagnostics;
 
 namespace Quicktup.Settings;
 
-public class MapUnit(string ConfigName) : Setting(ConfigName)
+public class MapUnit(string ConfigName, IEnumerable<VariableInit> Variables) : Setting(ConfigName, Variables)
 {
     public override string Execute()
     {
