@@ -1,4 +1,4 @@
-cmdkey /delete:LegacyGeneric:target=git:https://github.com
+cmdkey /generic:LegacyGeneric:target=git:https://github.com /user:username /pass:auth_key
 
 $Proxy = ""
 
